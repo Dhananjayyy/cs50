@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table table-bordered table-striped">
+        <thead>
+          <th scope="col">Symbol</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Shares</th>
+          <th scope="col">Total Value</th>
+        </thead>
+        <tbody>
+            {% for comp in disp %}
+                {% if comp["total_shares"] > 0 %}
+                    <tr>
+                        <th scope="row">{{comp["symbol"]}}</th>
+                        <td>{{comp["name"]}}</td>
+                        <td>{{comp["price"] | usd}}</td>
+                        <td>{{comp["total_shares"]}}</td>
+                        <td>{{comp["tp"] | usd}}</td>
+                        <td colspan="2"><input type="number" name="shares" class="form-control" id="{{comp['symbol']}}"></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <th colspan="4" scope="row">Cash</th>
+                <td>{{cash | usd}}</td>
+                <td><button class="btn btn-primary" id="buy">Buy</button></td>
+                <td><button class="btn btn-primary" id="sell">Sell</button></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th colspan="4" scope="row">Portfolio Value</th>
+            <td>{{(cash + (disp | sum(attribute="tp"))) | usd}}</td>
+        </tfoot>
+    </table>
+
+    <script>
+        var btnBuy = document.querySelector("#buy");
+        var btnSell = document.querySelector("#sell");
+
+        btnBuy.onclick = function(e) {
+            let els = document.querySelectorAll("input[name='shares']");
+            for(let i of els)
+            {
+                if (i.value != "")
+                {
+                    let req = new XMLHttpRequest();
+                    let data = new FormData();
+                    data.append("symbol", i.id);
+                    data.append("shares", i.value);
+                    req.onreadystatechange = function () {
+                        if(req.readyState == 4 && (req.status == 200 || req.status == 400))
+                        {
+                            console.log(this.responseText);
+                            document.clear();
+                            document.write(this.responseText);
+                        }
+                    };
+                    req.open("POST", "/buy", true);
+                    req.send(data);
+                }
+            }
+        };
+
+        btnSell.onclick = function(e) {
+            let els = document.querySelectorAll("input[name='shares']");
+            for(let i of els)
+            {
+                if (i.value != "")
+                {
+                    let req = new XMLHttpRequest();
+                    let data = new FormData();
+                    data.append("symbol", i.id);
+                    data.append("shares", i.value);
+                    req.onreadystatechange = function () {
+                        if(req.readyState == 4 && (req.status == 200 || req.status == 400))
+                        {
+                            console.log(this.responseText);
+                            document.clear();
+                            document.write(this.responseText);
+                        }
+                    };
+                    req.open("POST", "/sell", true);
+                    req.send(data);
+                }
+            }
+        };
+    </script>
+{% endblock %}

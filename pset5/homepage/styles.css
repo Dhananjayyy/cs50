@@ -1,0 +1,49 @@
+.container
+{
+    margin-top: 30px;
+    background-color: white;
+}
+
+body
+{
+    background-image: url("img/wp.jpg");
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center;
+    height: 100%;
+}
+
+footer
+{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: white;
+    margin-top: 30px;
+}
+
+main
+{
+    min-height: 50vh;
+}
+
+#hng
+{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+}
+
+#construct
+{
+    margin-top: 50px;
+}
+
+#content
+{
+    font-family: SanSerif;
+    font-size: 22px;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+    width: 90%;
+    margin: auto;
+}

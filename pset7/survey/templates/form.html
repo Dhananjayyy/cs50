@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+    <h1 class="mb-3">Form</h1>
+
+    <!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+    <form action="/form" method="post">
+
+        <div class = "form-group row">
+            <div class = "col-sm-2" >
+                <input type = "text" autofocus placeholder = "Name" name = "name" class = "form-control" />
+            </div>
+        </div>
+
+        <div class = "form-group">
+            <label for = "radio" class = "form-label">Preferred Language</label>
+            <div id = "radio">
+                <div class = "form-check col-sm-2" >
+                    <input type = "radio" id = "C" name = "language" value = "C" class = "form-check-input" />
+                    <label for = "C" class = "form-check-label">C Language</label>
+                </div>
+                <div class = "form-check col-sm-2">
+                    <input type="radio" name = "language" id = "python" value = "Python" class = "form-check-input" />
+                    <label for = "python" class = "form-check-label">Python</label>
+                </div>
+            </div>
+        </div>
+
+        <div class = "form-group">
+            <select name = "exp" class = "custom-select col-sm-2">
+                <option disabled selected>Experience</option>
+                <option value = 1> 1 year </option>
+                <option value = 2> > 1 year </option>
+            </select>
+        </div>
+
+        <!-- http://getbootstrap.com/docs/4.1/components/buttons/ -->
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+
+    <script>
+
+        let noiceForm = document.querySelector("form");
+
+        noiceForm.onsubmit = function () {
+            let name = document.querySelector("input[name='name']");
+            let radios = document.querySelectorAll("input[name='language']");
+            let select = document.querySelector("select");
+            let val = true;
+
+            if (!name.value)
+            {
+                alert("Enter Name");
+                return false;
+            }
+
+            if (!(radios[0].checked || radios[1].checked))
+            {
+                alert("Enter Preferred Language");
+                return false;
+            }
+
+            if (select.value == "Experience")
+            {
+                alert("Enter Experience");
+                return false;
+            }
+
+        }
+    </script>
+
+{% endblock %}

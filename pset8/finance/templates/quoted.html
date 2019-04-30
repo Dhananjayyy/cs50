@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{info["symbol"]}}
+{% endblock %}
+
+{% block main %}
+    <table class = "table table-bordered">
+        <tr>
+            <td>Symbol</td>
+            <td>{{info["symbol"]}}</td>
+        </tr>
+
+        <tr>
+            <td>Company Name</td>
+            <td>{{info["name"]}}</td>
+        </tr>
+
+        <tr>
+            <td>Price</td>
+            <td>{{info["price"] | usd}}</td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <table id = "e" class = "table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Preferred Language</th>
+                <th>Years of Experience</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    {% for key in row %}
+                        <td>{{row[key]}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#e').DataTable();
+    } );
+</script>
+
+{% endblock %}

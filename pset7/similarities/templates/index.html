@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div id = "npF">
+        <form action="/compare" enctype="multipart/form-data" method="post">
+
+            <div class = "form-group row">
+                <label class = "col-sm-2 col-form-label" for = "file1">File 1</label>
+                <div class = "col-sm-10">
+                    <input type = "file" class = "form-control" id = "file1" name = "file1" />
+                </div>
+            </div>
+
+            <div class ="form-group row">
+                <label class = "col-sm-2 col-form-label" for = "file2">File 2</label>
+                <div class ="col-sm-10">
+                    <input type = "file" class = "form-control" name = "file2" />
+                </div>
+            </div>
+
+            <div class = "form-group">
+                <div class="form-check col-sm-2">
+                  <input class = "form-check-input" type = "radio" name = "algorithm" id = "lines" value = "lines" checked />
+                  <label class = "form-check-label" for = "lines">Lines</label>
+                </div>
+
+                <div class="form-check col-sm-2">
+                  <input class = "form-check-input" type = "radio" name = "algorithm" id = "sentences" value = "sentences" />
+                  <label class = "form-check-label" for = "sentences">Sentences</label>
+                </div>
+
+                <div class="form-check col-sm-2">
+                  <input class = "form-check-input" type = "radio" name = "algorithm" id = "substrings" value = "substrings" />
+                  <label class = "form-check-label" for = "substrings">Substrings</label>
+                </div>
+            </div>
+
+            <div class = "form-group row">
+                <label class = "col-form-label col-sm-5" for = "length">Substring Length</label>
+                <div class = "col-sm-10">
+                    <input type = "text" class = "form-control" disabled name = "length" id = "length" />
+                </div>
+            </div>
+
+            <button type = "submit" class = "btn btn-primary">Compare</button>
+        </form>
+
+    </div>
+    <script>
+        let subn = document.querySelectorAll("input[type='radio']");
+        let inpt = document.querySelector("#length");
+        for (var el of subn)
+        {
+            el.onchange = function(e){
+                var ob = e.currentTarget;
+                if (ob.id == "substrings")
+                {
+                    inpt.disabled = false;
+                }
+                else
+                {
+                    inpt.disabled = true;
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
